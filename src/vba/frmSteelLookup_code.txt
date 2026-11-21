@@ -1,0 +1,173 @@
+Option Explicit
+
+Private mCurrentResults As Variant
+Private mResultCount As Long
+
+Private Sub UserForm_Initialize()
+    Dim ctrl As MSForms.Control
+    For Each ctrl In Me.Controls
+        On Error Resume Next
+        ctrl.Font.Name = "Segoe UI"
+        ctrl.Font.Size = 9
+        On Error GoTo 0
+    Next ctrl
+    Me.cboCategory.Style = fmStyleDropDownList
+    Me.lblResult.Font.Bold = True
+    Me.lblResult.ForeColor = RGB(0, 51, 153)
+    Me.btnInsert.Font.Bold = True
+
+    modUnicode.SetFormCaptionU Me, modUnicode.T("FRM_LOOKUP_TITLE")
+    Me.lblCategory.Caption = modUnicode.T("FRM_LBL_CAT")
+    Me.lblSearch.Caption = modUnicode.T("FRM_LBL_SEARCH")
+    Me.lblCalc.Caption = modUnicode.T("FRM_LBL_CALC")
+    Me.lblLen.Caption = modUnicode.T("FRM_LBL_LEN")
+    Me.lblQty.Caption = modUnicode.T("FRM_LBL_QTY")
+    Me.btnInsert.Caption = modUnicode.T("FRM_BTN_INSERT")
+    Me.btnExport.Caption = modUnicode.T("FRM_BTN_EXPORT")
+    Me.btnClose.Caption = modUnicode.T("FRM_BTN_CLOSE")
+
+    Me.cboCategory.Clear
+    Me.cboCategory.AddItem modUnicode.T("FRM_ALL_CATS")
+
+    Dim cats As Variant
+    cats = modCatalog.GetCatalogCategories()
+    If IsArray(cats) Then
+        Dim i As Long
+        For i = LBound(cats) To UBound(cats)
+            Me.cboCategory.AddItem CStr(cats(i))
+        Next i
+    End If
+    Me.cboCategory.ListIndex = 0
+
+    Me.txtLen.Text = "1"
+    Me.txtQty.Text = "1"
+
+    With Me.lstResults
+        .ColumnCount = 6
+        .ColumnWidths = "95 pt;195 pt;35 pt;50 pt;65 pt;70 pt"
+    End With
+
+    RefreshList
+End Sub
+
+Private Sub cboCategory_Change()
+    RefreshList
+End Sub
+
+Private Sub txtSearch_Change()
+    RefreshList
+End Sub
+
+Private Sub txtLen_Change()
+    UpdateQuickCalc
+End Sub
+
+Private Sub txtQty_Change()
+    UpdateQuickCalc
+End Sub
+
+Private Sub lstResults_Click()
+    UpdateQuickCalc
+End Sub
+
+Private Sub lstResults_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
+    btnInsert_Click
+End Sub
+
+Private Sub RefreshList()
+    Dim cat As String
+    If Me.cboCategory.ListIndex >= 0 Then
+        cat = Me.cboCategory.Text
+    Else
+        cat = modUnicode.T("FRM_ALL_CATS")
+    End If
+
+    mCurrentResults = modCatalog.SearchCatalog(cat, Me.txtSearch.Text, 350)
+    Me.lstResults.Clear
+    mResultCount = 0
+
+    If Not IsArray(mCurrentResults) Then
+        Me.lblStatus.Caption = "0 items"
+        UpdateQuickCalc
+        Exit Sub
+    End If
+
+    mResultCount = UBound(mCurrentResults, 1)
+    Dim disp() As Variant
+    ReDim disp(0 To mResultCount - 1, 0 To 5)
+
+    Dim i As Long
+    For i = 1 To mResultCount
+        disp(i - 1, 0) = CStr(mCurrentResults(i, 1))
+        disp(i - 1, 1) = CStr(mCurrentResults(i, 3))
+        disp(i - 1, 2) = CStr(mCurrentResults(i, 4))
+        disp(i - 1, 3) = CStr(mCurrentResults(i, 5))
+        disp(i - 1, 4) = Format$(Val(mCurrentResults(i, 6)), "0.000")
+        If Val(mCurrentResults(i, 8)) > 0 Then
+            disp(i - 1, 5) = Format$(Val(mCurrentResults(i, 8)), "#,##0")
+        Else
+            disp(i - 1, 5) = "-"
+        End If
+    Next i
+
+    Me.lstResults.List = disp
+    If mResultCount > 0 Then Me.lstResults.ListIndex = 0
+    Me.lblStatus.Caption = mResultCount & IIf(mResultCount >= 350, "+ items (refine search)", " items")
+    UpdateQuickCalc
+End Sub
+
+Private Sub UpdateQuickCalc()
+    If Me.lstResults.ListIndex < 0 Or Not IsArray(mCurrentResults) Then
+        Me.lblResult.Caption = modUnicode.T("FRM_LBL_RESULT") & " 0.00 kg"
+        Exit Sub
+    End If
+
+    Dim idx As Long
+    idx = Me.lstResults.ListIndex + 1
+    Dim wtPerUnit As Double
+    wtPerUnit = Val(mCurrentResults(idx, 6))
+
+    Dim lenVal As Double, qtyVal As Double
+    lenVal = Val(Replace(Me.txtLen.Text, ",", "."))
+    qtyVal = Val(Replace(Me.txtQty.Text, ",", "."))
+    If lenVal <= 0 Then lenVal = 0
+    If qtyVal <= 0 Then qtyVal = 0
+
+    Dim totKg As Double
+    totKg = wtPerUnit * lenVal * qtyVal
+    Me.lblResult.Caption = modUnicode.T("FRM_LBL_RESULT") & " " & Format$(totKg, "#,##0.00") & " kg (" & Format$(totKg / 1000#, "0.000") & " ton)"
+End Sub
+
+Private Sub btnInsert_Click()
+    If Me.lstResults.ListIndex < 0 Or Not IsArray(mCurrentResults) Then Exit Sub
+    Dim idx As Long
+    idx = Me.lstResults.ListIndex + 1
+
+    Dim lenVal As Double, qtyVal As Double
+    lenVal = Val(Replace(Me.txtLen.Text, ",", "."))
+    qtyVal = Val(Replace(Me.txtQty.Text, ",", "."))
+    If lenVal <= 0 Then lenVal = 1
+    If qtyVal <= 0 Then qtyVal = 1
+
+    Dim wtPerUnit As Double
+    wtPerUnit = Val(mCurrentResults(idx, 6))
+
+    modCatalog.InsertMaterialToActiveRow _
+        CStr(mCurrentResults(idx, 1)), _
+        CStr(mCurrentResults(idx, 2)), _
+        CStr(mCurrentResults(idx, 3)), _
+        CStr(mCurrentResults(idx, 4)), _
+        mCurrentResults(idx, 5), _
+        wtPerUnit, _
+        qtyVal, _
+        lenVal, _
+        Round(wtPerUnit * lenVal * qtyVal, 2)
+End Sub
+
+Private Sub btnExport_Click()
+    modCatalog.ExportCatalogToActiveBook True
+End Sub
+
+Private Sub btnClose_Click()
+    Unload Me
+End Sub

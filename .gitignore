@@ -1,0 +1,32 @@
+# Visual Studio / .NET build outputs
+**/bin/
+**/obj/
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Dist large binaries and generated test outputs (>100MB or generated)
+dist/engine/
+dist/setup/
+dist/*.xlsx
+dist/*.json
+dist/_test*
+
+# Microsoft Office temporary lock files
+~$*.xlsx
+~$*.xlsm
+~$*.xlam
+*.tmp
+*.log
+
+# OS-generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+
+# Keep prebuilt add-in
+!dist/zOfit_QS_Pro.xlam

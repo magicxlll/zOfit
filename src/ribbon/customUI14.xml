@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui" onLoad="Ribbon_OnLoad">
+  <ribbon>
+    <tabs>
+      <tab id="tabZOfitQS" label="zOfit QS Pro" insertAfterMso="TabHome">
+
+        <!-- GROUP 1: DỰ ÁN & QUY CHUẨN SPEC -->
+        <group id="grpProject" label="Dự án &amp; Spec">
+          <button id="btnInitQS" label="Khởi tạo Hồ sơ QS" size="large"
+                  imageMso="FileNewDefault"
+                  screentip="Khởi tạo bộ Hồ sơ QS Pro chuẩn"
+                  supertip="Tạo đồng bộ QS_Settings, QS_Spec, QS_Data, DB_VatLieu và QS_Master_BOQ trong file Excel đang mở."
+                  onAction="Ribbon_OnAction" />
+          <button id="btnSpecSheet" label="Tiêu chuẩn QS_Spec" size="large"
+                  imageMso="PropertySheet"
+                  screentip="Mở hoặc tạo Bảng Tiêu chuẩn Kỹ thuật Dự án (SPEC_*)"
+                  supertip="Chuẩn hóa cao độ đào đắp, taluy, lớp bảo vệ cốt thép, neo/nối, Coupler, hao hụt, lót móng, vén chân tường WC theo 6 file Spec."
+                  onAction="Ribbon_OnAction" />
+          <menu id="mnuProjectCfg" label="Quy tắc &amp; Ngôn ngữ" size="normal" imageMso="ReviewTrackChanges">
+            <button id="btnSettings" label="Mở bảng QS_Settings" imageMso="PropertySheet" onAction="Ribbon_OnAction" />
+            <menuSeparator id="sepProj1" />
+            <button id="btnPresetVN" label="Chuẩn TT13/2021/TT-BXD (VN)" imageMso="AcceptInvitation" onAction="Ribbon_OnAction" />
+            <button id="btnPresetPOMI" label="Chuẩn POMI / SMM7 (Quốc tế)" imageMso="AcceptInvitation" onAction="Ribbon_OnAction" />
+            <button id="btnPresetCustom" label="Tùy chỉnh nội bộ" imageMso="EditFormula" onAction="Ribbon_OnAction" />
+            <menuSeparator id="sepProj2" />
+            <button id="btnLangVI" label="Ngôn ngữ: Tiếng Việt (VI)" imageMso="CheckNames" onAction="Ribbon_OnAction" />
+            <button id="btnLangEN" label="Ngôn ngữ: English (EN)" imageMso="CheckNames" onAction="Ribbon_OnAction" />
+            <button id="btnLangBI" label="Ngôn ngữ: Song ngữ (VI / EN)" imageMso="CheckNames" onAction="Ribbon_OnAction" />
+          </menu>
+        </group>
+
+        <!-- GROUP 2: BÓC TÁCH BÁN TỰ ĐỘNG (SINGLE-ENTRY ENGINE) -->
+        <group id="grpBOQ" label="Bóc tách Bán Tự Động">
+          <button id="btnQsData" label="1. Nhập QS_Data" size="large"
+                  imageMso="TableInsertExcel"
+                  screentip="Mở bảng Nhập Cấu kiện chuẩn (Hình học &amp; Lót tùy biến)"
+                  supertip="Nhập dài/rộng/cao + chiều dày/mở rộng bê tông lót riêng từng cấu kiện (hỗ trợ chấm CAD Linkcad)."
+                  onAction="Ribbon_OnAction" />
+          <button id="btnVisualRebar" label="Nhập Thép (Hình vẽ)" size="large"
+                  imageMso="ObjectPictureFill"
+                  screentip="Mở Bảng Vẽ &amp; Nhập Thép Trực Quan cho Cấu kiện đang chọn"
+                  supertip="Hiển thị hình vẽ mặt bằng/mặt cắt cấu kiện kèm chú thích thanh thép và bảng nhập sửa không giới hạn (bấm Đồng ý tự ghi vào QS_RebarConfig)."
+                  onAction="Ribbon_OnAction" />
+          <button id="btnRebarConfig" label="2. Bảng Thép QS_RebarConfig" size="large"
+                  imageMso="TableEffectsCellBevelGallery"
+                  screentip="Bảng Nhập &amp; Kiểm soát Thép Tường Minh theo Cấu kiện (v3.0)"
+                  supertip="Hiển thị trực tiếp từng đoạn Left..Mid..Right, số thanh QT'Y, Lbar, Lap và khối lượng kg ngay tại dòng nhập (hỗ trợ SL.m / L.m / xD / mm / +-Lth)."
+                  onAction="Ribbon_OnAction" />
+          <menu id="mnuRebarCfgTools" label="Công cụ Thép CK" size="normal" imageMso="ShapesInsertGallery">
+            <button id="btnExpandRebar" label="Nạp / Cập nhật Block Thép từ QS_Data" imageMso="DataRefreshAll" onAction="Ribbon_OnAction" />
+            <menuSeparator id="sepRcfg1" />
+            <button id="btnInsertMainBar" label="Chèn Thanh Chính (Main Bar) vào Block" imageMso="RowsInsert" onAction="Ribbon_OnAction" />
+            <button id="btnInsertStirBar" label="Chèn Thanh Đai / C-Tie vào Block" imageMso="RowsInsert" onAction="Ribbon_OnAction" />
+            <button id="btnInsertCustomBar" label="Chèn Thanh Tùy Biến (CUSTOM)" imageMso="RowsInsert" onAction="Ribbon_OnAction" />
+            <menuSeparator id="sepRcfg2" />
+            <button id="btnPickShapeForCfg" label="Chọn Dáng Thép (41 dáng L1..L7)" imageMso="ShapesInsertGallery" onAction="Ribbon_OnAction" />
+          </menu>
+          <button id="btnGenStruct" label="3. Sinh Detail + TKT" size="large"
+                  imageMso="GroupInsert"
+                  screentip="1-Click Sinh hoặc Đồng bộ (Sync) bảng Detail &amp; Thống kê Thép"
+                  supertip="Từ QS_Data + QS_RebarConfig + QS_Spec tự động sinh thuần công thức Excel bảng &lt;Nhà&gt;_Detail và TKT_&lt;Nhà&gt; không phá hủy dòng sửa tay."
+                  onAction="Ribbon_OnAction" />
+          <menu id="mnuFinish" label="Hoàn thiện" size="normal" imageMso="HomePage">
+            <button id="btnCreateFinishInputs" label="1. Bảng Cửa (QS_DoorWin) &amp; Phòng (QS_Rooms)" imageMso="TableDrawTable" onAction="Ribbon_OnAction" />
+            <button id="btnGenFinish" label="2. Sinh / Sync Finishing_Detail" imageMso="RefreshAll" onAction="Ribbon_OnAction" />
+          </menu>
+          <menu id="mnuInfra" label="Hạ tầng" size="normal" imageMso="DiagramInsert">
+            <button id="btnCreateInfraInputs" label="1. Bảng Hạ tầng (QS_Infra)" imageMso="TableDrawTable" onAction="Ribbon_OnAction" />
+            <button id="btnFeedCadToInfra" label="2. Nạp L từ CAD Parsed sang QS_Infra" imageMso="DataRefreshAll" onAction="Ribbon_OnAction" />
+            <button id="btnGenInfra" label="3. Sinh / Sync Civil_Detail" imageMso="RefreshAll" onAction="Ribbon_OnAction" />
+          </menu>
+          <button id="btnMarkManual" label="Giữ dòng Tay (MANUAL)" size="normal"
+                  imageMso="Lock"
+                  screentip="Đánh dấu dòng đang chọn là MANUAL để giữ nguyên khi Sync"
+                  supertip="Mọi dòng DxRxC tự chèn thêm vào *_Detail hoặc TKT_* sẽ luôn được SyncEngine bảo toàn 100%."
+                  onAction="Ribbon_OnAction" />
+          <separator id="sepBoq1" />
+          <button id="btnBoqLinker" label="3. Map-Link BOQ" size="large"
+                  imageMso="HyperlinkInsert"
+                  screentip="Gán link công thức an toàn từ *_Detail &amp; Thép vào BOQ Chủ đầu tư"
+                  supertip="Chọn ô đích trên BOQ mẫu CĐT (2. ARC+STRUC. / 3. CIVIL) và gán nhanh công thức cộng tổng không làm hỏng định dạng hoặc cột GAP A-B."
+                  onAction="Ribbon_OnAction" />
+          <button id="btnMasterBOQ" label="Khung Master BOQ" size="normal"
+                  imageMso="Consolidate"
+                  screentip="Tạo khung Master BOQ chuẩn khi chưa có mẫu của CĐT"
+                  onAction="Ribbon_OnAction" />
+        </group>
+
+        <!-- GROUP 3: THỐNG KÊ THÉP PRO -->
+        <group id="grpRebar" label="Thống kê Thép Pro">
+          <menu id="mnuCreateTKT" label="Tạo Bảng TKT" size="large" imageMso="TableDrawTable"
+                screentip="Tạo bảng Thống kê Cốt thép Chi tiết thủ công"
+                supertip="Tạo sheet TKT_* với 41 hình dạng chuẩn, Dropdown đường kính Ø6-Ø40, tự tính nối chồng, giảm uốn và Coupler.">
+            <button id="btnTKTMong" label="TKT Móng / Đài cọc" imageMso="TableDrawTable" onAction="Ribbon_OnAction" />
+            <button id="btnTKTGiang" label="TKT Giằng móng / Đà kiềng" imageMso="TableDrawTable" onAction="Ribbon_OnAction" />
+            <button id="btnTKTCot" label="TKT Cột / Vách" imageMso="TableDrawTable" onAction="Ribbon_OnAction" />
+            <button id="btnTKTDam" label="TKT Dầm" imageMso="TableDrawTable" onAction="Ribbon_OnAction" />
+            <button id="btnTKTSan" label="TKT Sàn / Cầu thang" imageMso="TableDrawTable" onAction="Ribbon_OnAction" />
+            <button id="btnTKTKhac" label="TKT Cấu kiện khác" imageMso="TableDrawTable" onAction="Ribbon_OnAction" />
+          </menu>
+          <button id="btnInsertBar" label="Chọn Dáng Thép" size="large"
+                  imageMso="ShapesInsertGallery"
+                  screentip="Mở thư viện 41 Hình dạng Cốt thép chuẩn (nhãn L1..L7, M1, M2)"
+                  onAction="Ribbon_OnAction" />
+          <menu id="mnuRowOps" label="Thao tác Dòng" size="normal" imageMso="RowsInsert">
+            <button id="btnRowDup" label="Nhân bản dòng thép" imageMso="Copy" onAction="Ribbon_OnAction" />
+            <button id="btnRowUp" label="Dời dòng lên trên" imageMso="MoveUp" onAction="Ribbon_OnAction" />
+            <button id="btnRowDown" label="Dời dòng xuống dưới" imageMso="MoveDown" onAction="Ribbon_OnAction" />
+            <button id="btnRowDel" label="Xóa dòng thép" imageMso="Delete" onAction="Ribbon_OnAction" />
+            <menuSeparator id="sepRow1" />
+            <button id="btnRedrawShapes" label="Vẽ hình minh họa lên bảng" imageMso="RefreshAll" onAction="Ribbon_OnAction" />
+            <button id="btnClearShapes" label="Xóa hình (Chế độ Siêu nhẹ)" imageMso="ClearAll" onAction="Ribbon_OnAction" />
+          </menu>
+          <menu id="mnuSteelShape" label="Thép Hình / Tấm" size="normal" imageMso="TableStyleGallery">
+            <button id="btnCreateSteelShape" label="Bảng TK Thép Hình / Inox / Lưới" imageMso="TableDrawTable" onAction="Ribbon_OnAction" />
+            <button id="btnCreateSteelPlate" label="Bảng TK Thép Tấm / Bản mã" imageMso="ShapesRectangle" onAction="Ribbon_OnAction" />
+          </menu>
+          <separator id="sepRebar1" />
+          <button id="btnSummaryRebar" label="Tổng hợp Thép" size="large"
+                  imageMso="PivotTableInsert"
+                  screentip="Tổng hợp thép toàn công trình (xuyên sheet &amp; theo BOQ Bucket)"
+                  onAction="Ribbon_OnAction" />
+          <button id="btnCutOptimize" label="Tối ưu Cắt Thép" size="large"
+                  imageMso="Cut"
+                  screentip="Tối ưu cắt thép cây 11.7m/12m (1D Cutting Stock)"
+                  onAction="Ribbon_OnAction" />
+        </group>
+
+        <!-- GROUP 4: TRA CỨU VẬT LIỆU -->
+        <group id="grpCatalog" label="Vật liệu">
+          <button id="btnSteelLookup" label="Tra cứu Thép &amp; Inox" size="large"
+                  imageMso="FindDialog"
+                  screentip="Tra cứu nhanh 1.559 quy cách Thép, Inox, Lưới hàn"
+                  onAction="Ribbon_OnAction" />
+          <button id="btnExportCatalog" label="Xuất Bảng tra" size="normal"
+                  imageMso="TableStyleGallery"
+                  onAction="Ribbon_OnAction" />
+          <button id="btnQuickWeight" label="Tính nhanh KL" size="normal"
+                  imageMso="Calculator"
+                  onAction="Ribbon_OnAction" />
+        </group>
+
+        <!-- GROUP 5: TÁCH CAD DATA & CÔNG CỤ QS -->
+        <group id="grpTools" label="CAD Parser &amp; Công cụ QS">
+          <button id="btnScanCadBeam" label="Quét Dầm CAD (MCP)" size="large"
+                  imageMso="ViewSlideMasterView"
+                  screentip="Quét Mặt Cắt Dầm từ AutoCAD (MCP) sang zOfit"
+                  supertip="Kết nối trực tiếp tới AutoCAD qua MCP để đọc bảng mặt cắt dầm (Kích thước, Thép trên, Thép dưới, Thép đai A/B/C, Thép bên), hiển thị trực quan và đổ thẳng vào QS_Data &amp; QS_RebarConfig."
+                  onAction="Ribbon_OnAction" />
+          <button id="btnParseCadData" label="Tách CAD Data" size="large"
+                  imageMso="TextToColumns"
+                  screentip="Tách bảng Text / Block CAD thô (sheet Data) sang QS_CAD_Parsed"
+                  supertip="Tự động nhận diện ống (D200-L44m), mương (A-W300-L=13m), cống hộp (Box:600x600-L11m) và hố ga (MG/DC) kèm bảng tổng hợp SUMIFS."
+                  onAction="Ribbon_OnAction" />
+          <separator id="sepTools1" />
+          <button id="btnCleanFile" label="Dọn rác Excel" size="normal"
+                  imageMso="ClearAll"
+                  onAction="Ribbon_OnAction" />
+          <button id="btnAuditBOQ" label="Kiểm tra Lỗi BOQ" size="normal"
+                  imageMso="FormulaErrorChecking"
+                  onAction="Ribbon_OnAction" />
+          <button id="btnExportClean" label="Xuất .xlsx Sạch" size="normal"
+                  imageMso="FileSaveAsExcelXlsx"
+                  onAction="Ribbon_OnAction" />
+          <separator id="sepTools2" />
+          <button id="btnEngineTest" label="Kiểm tra Engine" size="normal"
+                  imageMso="ConnectToServer"
+                  screentip="Kiểm tra kết nối Hybrid Local Engine (zofit-engine.exe)"
+                  onAction="Ribbon_OnAction" />
+          <button id="btnAbout" label="Hướng dẫn" size="normal"
+                  imageMso="Help"
+                  onAction="Ribbon_OnAction" />
+        </group>
+
+      </tab>
+    </tabs>
+  </ribbon>
+</customUI>

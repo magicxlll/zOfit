@@ -1,0 +1,42 @@
+ShapeCode,ShapeName_VI,ShapeName_EN,ParamLabels,DefaultL1,DefaultL2,DefaultL3,DefaultL4,DefaultL5,DefaultL6,DefaultL7,DefaultM1,DefaultM2,BendCount,HasLap,LengthFormulaExpr,ActiveCols
+D01,Thanh thẳng (L1),Straight Bar,L1,4000,0,0,0,0,0,0,0,0,0,1,F{r},F
+D02,Móc 180° 2 đầu cùng chiều (M1-L1-M2),Double 180-deg Hooks,L1 | M1 | M2,2400,0,0,0,0,0,0,150,150,2,1,F{r}+M{r}+N{r},F|M|N
+D03,Móc 180° + bẻ vuông lên (M1-L1-L2),180-deg Hook + 90-deg Up,L1 | L2 | M1,2400,300,0,0,0,0,0,150,0,2,1,F{r}+G{r}+M{r},F|G|M
+D04,Móc 180° 2 đầu ngược chiều (M1-L1-M2),Opposite 180-deg Hooks,L1 | M1 | M2,2400,0,0,0,0,0,0,150,150,2,1,F{r}+M{r}+N{r},F|M|N
+D05,Móc 180° + bẻ vuông xuống (M1-L1-L2),180-deg Hook + 90-deg Down,L1 | L2 | M1,2400,300,0,0,0,0,0,150,0,2,1,F{r}+G{r}+M{r},F|G|M
+D06,Thanh chữ L vuông (L1-L2),L-Bar 90-deg,L1 | L2,300,2400,0,0,0,0,0,0,0,1,1,F{r}+G{r},F|G
+D07,Thanh chữ U (L1-L2-L3),U-Bar,L1 | L2 | L3,300,2400,300,0,0,0,0,0,0,2,1,F{r}+G{r}+H{r},F|G|H
+D08,Thanh U gập xiên giữa (L1..L5),Stepped U-Bar (5 seg),L1 | L2 | L3 | L4 | L5,300,1200,400,1200,300,0,0,0,0,4,1,F{r}+G{r}+H{r}+I{r}+J{r},F|G|H|I|J
+D09,Thanh chữ L + vát xuống (L1-L2-L3),L-Bar + Slant Down,L1 | L2 | L3,300,2000,600,0,0,0,0,0,0,2,1,F{r}+G{r}+H{r},F|G|H
+D10,Thanh chữ L + vát lên (L1-L2-L3),L-Bar + Slant Up,L1 | L2 | L3,300,2000,600,0,0,0,0,0,0,2,1,F{r}+G{r}+H{r},F|G|H
+D11,Thanh vát + thẳng ngang (L1-L2),Slant + Horizontal,L1 | L2,600,2400,0,0,0,0,0,0,0,1,1,F{r}+G{r},F|G
+D12,Móc 180° + xiên + ngang (M-L1-L2),Hook 180 + Slant + Horz,L1 | L2 | M,1000,2000,0,0,0,0,0,150,0,2,1,F{r}+G{r}+M{r},F|G|M
+D13,Móc 180° 2 đầu lệch góc (M1-L1-L2-M2),Double 180 Hook Bent Bar,L1 | L2 | M1 | M2,1000,2000,0,0,0,0,0,150,150,3,1,F{r}+G{r}+M{r}+N{r},F|G|M|N
+D14,Thanh chữ Z vuông góc (L1-L2-L3),Z-Bar 90-deg,L1 | L2 | L3,300,2400,300,0,0,0,0,0,0,2,1,F{r}+G{r}+H{r},F|G|H
+D15,Thanh chữ Z xiên giữa (L1-L2-L3),Cranked Z-Bar,L1 | L2 | L3,1200,800,1200,0,0,0,0,0,0,2,1,F{r}+G{r}+H{r},F|G|H
+D16,Thanh máng chữ V đáy phẳng (L1-L2-L3),Trapezoid Trough Bar,L1 | L2 | L3,600,1800,600,0,0,0,0,0,0,2,1,F{r}+G{r}+H{r},F|G|H
+D17,Thanh uốn vai dầm 1 đầu L1..L4,Bent-up Shear Bar (4 seg),L1 | L2 | L3 | L4,1000,500,1500,1000,0,0,0,0,0,3,1,F{r}+G{r}+H{r}+I{r},F|G|H|I
+D18,Thanh vai dầm 2 đoạn xiên (L1..L5),Double Bent-up Bar (5 seg),L1 | L2 | L3 | L4 | L5,1000,500,1500,500,1000,0,0,0,0,4,1,F{r}+G{r}+H{r}+I{r}+J{r},F|G|H|I|J
+D19,Thanh L + bậc thang xuống (L1..L6),L-Bar + Double Step Down,L1 | L2 | L3 | L4 | L5 | L6,300,1000,400,1000,400,1000,0,0,0,5,1,F{r}+G{r}+H{r}+I{r}+J{r}+K{r},F|G|H|I|J|K
+D20,Thanh L + bậc xiên (L1..L4),L-Bar + Slant + Horz,L1 | L2 | L3 | L4,300,1200,800,1200,0,0,0,0,0,3,1,F{r}+G{r}+H{r}+I{r},F|G|H|I
+D21,Thanh L + bậc nâng (L1..L4),L-Bar + Step Up,L1 | L2 | L3 | L4,300,1200,800,1200,0,0,0,0,0,3,1,F{r}+G{r}+H{r}+I{r},F|G|H|I
+D22,Thanh L + vai dầm (L1..L6),L-Bar + Bent-up (6 seg),L1 | L2 | L3 | L4 | L5 | L6,300,1000,450,1500,450,1000,0,0,0,5,1,F{r}+G{r}+H{r}+I{r}+J{r}+K{r},F|G|H|I|J|K
+D23,Thép chống cắt / Vai đôi (L1..L6),Double Chair / Crank (6 seg),L1 | L2 | L3 | L4 | L5 | L6,400,800,500,800,400,300,0,0,0,6,0,F{r}+G{r}+H{r}+I{r}+J{r}+K{r},F|G|H|I|J|K
+D24,Đai C móc 135° 2 đầu (M1-L1-M2),C-Tie 135-deg Both Ends,L1 | M1 | M2,300,0,0,0,0,0,0,80,80,2,0,F{r}+M{r}+N{r},F|M|N
+D25,Thanh móc 135° + bẻ vuông lên (M-L1-L2),135-deg Hook + 90-deg Up,L1 | L2 | M,2000,300,0,0,0,0,0,100,0,2,1,F{r}+G{r}+M{r},F|G|M
+D26,Thanh móc 135° ngược chiều (M1-L1-M2),Opposite 135-deg Hooks,L1 | M1 | M2,2000,0,0,0,0,0,0,100,100,2,1,F{r}+M{r}+N{r},F|M|N
+D27,Thanh móc 135° + bẻ vuông xuống (M1-L1-L2),135-deg Hook + 90-deg Down,L1 | L2 | M1,2000,300,0,0,0,0,0,100,0,2,1,F{r}+G{r}+M{r},F|G|M
+D28,Thanh L + hạ bậc + nâng bậc (L1..L6),L-Bar + Trough (6 seg),L1 | L2 | L3 | L4 | L5 | L6,300,1000,450,1200,450,1000,0,0,0,5,1,F{r}+G{r}+H{r}+I{r}+J{r}+K{r},F|G|H|I|J|K
+D29,Thanh L + 2 bậc thang lên (L1..L6),L-Bar + Double Step Up,L1 | L2 | L3 | L4 | L5 | L6,300,1000,400,1000,400,1000,0,0,0,5,1,F{r}+G{r}+H{r}+I{r}+J{r}+K{r},F|G|H|I|J|K
+D30,Thanh mũ / Vai dầm ngược (L1..L4),Inverted L-Crank (4 seg),L1 | L2 | L3 | L4,300,1200,1000,300,0,0,0,0,0,3,1,F{r}+G{r}+H{r}+I{r},F|G|H|I
+D31,Thanh U + hạ bậc giữa (L1..L7),U-Bar + Trough (7 seg),L1 | L2 | L3 | L4 | L5 | L6 | L7,300,1000,450,1200,450,1000,300,0,0,6,1,F{r}+G{r}+H{r}+I{r}+J{r}+K{r}+L{r},F|G|H|I|J|K|L
+D32,Thanh U + nâng bậc giữa (L1..L7),U-Bar + Raised Mid (7 seg),L1 | L2 | L3 | L4 | L5 | L6 | L7,300,1000,450,1200,450,1000,300,0,0,6,1,F{r}+G{r}+H{r}+I{r}+J{r}+K{r}+L{r},F|G|H|I|J|K|L
+D33,Thanh giật cấp 2 bậc (L1..L5),Double Cranked Bar (5 seg),L1 | L2 | L3 | L4 | L5,1000,400,1200,400,1000,0,0,0,0,4,1,F{r}+G{r}+H{r}+I{r}+J{r},F|G|H|I|J
+D34,Thép kẹp góc nhọn (L1-L2-L3),Acute Angle Hairpin (3 seg),L1 | L2 | L3,1200,400,1200,0,0,0,0,0,0,2,0,F{r}+G{r}+H{r},F|G|H
+D35,Đai chữ C hở 4 cạnh (L1..L4),4-Side Open Stirrup,L1 | L2 | L3 | L4,300,800,300,400,0,0,0,0,0,3,0,F{r}+G{r}+H{r}+I{r},F|G|H|I
+D36,Đai kín chữ nhật hở lòng (L1..L5),5-Segment Closed Hook Box,L1 | L2 | L3 | L4 | L5,150,300,300,800,300,0,0,0,0,4,0,F{r}+G{r}+H{r}+I{r}+J{r},F|G|H|I|J
+D37,Thanh cầu thang xuống (L1..L5),Stair Bar Down (5 seg),L1 | L2 | L3 | L4 | L5,600,300,1000,1200,800,0,0,0,0,4,1,F{r}+G{r}+H{r}+I{r}+J{r},F|G|H|I|J
+D38,Thanh cầu thang lên (L1..L5),Stair Bar Up (5 seg),L1 | L2 | L3 | L4 | L5,600,300,1000,1200,800,0,0,0,0,4,1,F{r}+G{r}+H{r}+I{r}+J{r},F|G|H|I|J
+D39,Thép đai kín chữ nhật (L1-L2-M),Closed Rectangular Stirrup (2*M),L1 | L2 | M(moc),300,450,0,0,0,0,0,80,0,4,0,2*(F{r}+G{r})+2*M{r},F|G|M
+D40,Thanh U + bậc cầu thang (L1..L7),U-Bar + Double Step Up (7 seg),L1 | L2 | L3 | L4 | L5 | L6 | L7,300,800,400,1000,400,800,300,0,0,6,1,F{r}+G{r}+H{r}+I{r}+J{r}+K{r}+L{r},F|G|H|I|J|K|L
+D41,Thép đai tròn (Bán kính R + M),Circular Hoop Stirrup (R + M),R(ban kinh) | M(noi),250,0,0,0,0,0,0,200,0,0,0,2*PI()*F{r}+M{r},F|M

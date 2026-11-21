@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>zOfit_QS_Pro_Setup</AssemblyName>
+    <RootNamespace>ZOfit.Installer</RootNamespace>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\dist\zOfit_QS_Pro.xlam">
+      <LogicalName>ZOfit.Installer.Payload.zOfit_QS_Pro.xlam</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\dist\engine\zofit-engine.exe">
+      <LogicalName>ZOfit.Installer.Payload.zofit-engine.exe</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

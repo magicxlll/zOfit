@@ -1,0 +1,102 @@
+Option Explicit
+
+Private mSources As Variant
+
+Private Sub UserForm_Initialize()
+    On Error Resume Next
+    Me.BackColor = RGB(246, 248, 252)
+    modUnicode.SetFormCaptionU Me, modUnicode.U("zOfit QS Pro - G\u00e1n Link Kh\u1ed1i L\u01b0\u1ee3ng V\u00e0o BOQ Ch\u1ee7 \u0110\u1ea7u T\u01b0")
+
+    lblTarget.Caption = modUnicode.U("\u00d4 \u0111\u00edch \u0111ang ch\u1ecdn tr\u00ean BOQ:")
+    lblFilter.Caption = modUnicode.U("L\u1ecdc nhanh:")
+    lblMult.Caption = modUnicode.U("Quy \u0111\u1ed5i \u0111\u01a1n v\u1ecb / h\u1ec7 s\u1ed1:")
+    btnRefresh.Caption = modUnicode.U("L\u1ea5y \u00f4 \u0111ang ch\u1ecdn")
+    btnLink.Caption = modUnicode.U("G\u00e1n Link C\u00f4ng Th\u1ee9c")
+    btnClose.Caption = modUnicode.U("\u0110\u00f3ng")
+
+    cboMult.Clear
+    cboMult.AddItem "1"
+    cboMult.AddItem "/1000"
+    cboMult.AddItem "*1.03"
+    cboMult.AddItem "/1000*1.03"
+    cboMult.ListIndex = 0
+
+    lstSources.MultiSelect = fmMultiSelectMulti
+    lstSources.ColumnCount = 5
+    lstSources.ColumnWidths = "130;210;40;75;140"
+
+    LoadSourcesList ""
+    RefreshTargetCell
+    On Error GoTo 0
+End Sub
+
+Public Sub RefreshTargetCell()
+    On Error Resume Next
+    If Not ActiveCell Is Nothing And Not ActiveSheet Is Nothing Then
+        txtTarget.Text = "'" & ActiveSheet.Name & "'!" & ActiveCell.Address(False, False)
+    End If
+    On Error GoTo 0
+End Sub
+
+Private Sub LoadSourcesList(ByVal filterText As String)
+    lstSources.Clear
+    If Not modUnicode.EnsureActiveWorkbook() Then Exit Sub
+    mSources = modBoqLinker.CollectLinkableSources(ActiveWorkbook)
+    If Not IsArray(mSources) Then
+        lblCount.Caption = "0 items"
+        Exit Sub
+    End If
+
+    Dim f As String: f = LCase$(Trim$(filterText))
+    Dim i As Long, shown As Long
+    shown = 0
+    For i = LBound(mSources, 1) To UBound(mSources, 1)
+        Dim lineText As String
+        lineText = LCase$(CStr(mSources(i, 0)) & " " & CStr(mSources(i, 1)))
+        If Len(f) = 0 Or InStr(1, lineText, f, vbTextCompare) > 0 Then
+            lstSources.AddItem CStr(mSources(i, 0))
+            lstSources.List(shown, 1) = CStr(mSources(i, 1))
+            lstSources.List(shown, 2) = CStr(mSources(i, 2))
+            lstSources.List(shown, 3) = CStr(mSources(i, 3))
+            lstSources.List(shown, 4) = CStr(mSources(i, 4))
+            shown = shown + 1
+        End If
+    Next i
+    lblCount.Caption = shown & " items"
+End Sub
+
+Private Sub txtFilter_Change()
+    LoadSourcesList txtFilter.Text
+End Sub
+
+Private Sub btnRefresh_Click()
+    RefreshTargetCell
+End Sub
+
+Private Sub btnLink_Click()
+    On Error GoTo ErrH
+    If ActiveCell Is Nothing Then Exit Sub
+    Dim refs() As String, cnt As Long, i As Long
+    cnt = 0
+    For i = 0 To lstSources.ListCount - 1
+        If lstSources.Selected(i) Then
+            ReDim Preserve refs(0 To cnt)
+            refs(cnt) = lstSources.List(i, 4)
+            cnt = cnt + 1
+        End If
+    Next i
+    If cnt = 0 Then
+        modUnicode.MsgBoxU modUnicode.U("Vui l\u00f2ng ch\u1ecdn \u00edt nh\u1ea5t 1 h\u1ea1ng m\u1ee5c ngu\u1ed3n!"), vbExclamation
+        Exit Sub
+    End If
+    Dim f As String
+    f = modBoqLinker.AssignLinkFormulaToCell(ActiveCell, refs, cboMult.Text)
+    lblCount.Caption = "Linked: " & f
+    Exit Sub
+ErrH:
+    modUnicode.MsgBoxU "Link Error: " & Err.Description, vbCritical
+End Sub
+
+Private Sub btnClose_Click()
+    Unload Me
+End Sub

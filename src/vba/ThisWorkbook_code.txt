@@ -1,0 +1,96 @@
+Option Explicit
+
+Private WithEvents mApp As Excel.Application
+
+Private Sub Workbook_Open()
+    Set mApp = Application
+End Sub
+
+Private Sub Workbook_BeforeClose(Cancel As Boolean)
+    ResetTKTPopupMenu
+    Set mApp = Nothing
+End Sub
+
+Private Sub mApp_SheetSelectionChange(ByVal Sh As Object, ByVal Target As Range)
+    On Error Resume Next
+    If TypeOf Sh Is Worksheet Then
+        If modRebarTKT.IsTKTSheet(Sh) Or modRebarConfig.IsRebarConfigSheet(Sh) Then
+            modRebarTKT.SyncPickerWithActiveRow
+        End If
+    End If
+    On Error GoTo 0
+End Sub
+
+Private Sub mApp_SheetBeforeRightClick(ByVal Sh As Object, ByVal Target As Range, Cancel As Boolean)
+    ResetTKTPopupMenu
+    On Error Resume Next
+    If TypeOf Sh Is Worksheet Then
+        If modRebarTKT.IsTKTSheet(Sh) Then
+            BuildTKTPopupMenu
+        ElseIf modRebarConfig.IsRebarConfigSheet(Sh) Then
+            BuildRebarCfgPopupMenu
+        ElseIf modQsData.IsQsDataSheet(Sh) Then
+            BuildQsDataPopupMenu
+        End If
+    End If
+    On Error GoTo 0
+End Sub
+
+Private Sub mApp_SheetDeactivate(ByVal Sh As Object)
+    ResetTKTPopupMenu
+End Sub
+
+Private Sub BuildTKTPopupMenu()
+    On Error Resume Next
+    Dim cb As CommandBar
+    Set cb = Application.CommandBars("Cell")
+    If cb Is Nothing Then Exit Sub
+
+    AddMenuBtn cb, 1, modUnicode.U("zOfit TKT: Ch\u1ecdn / Th\u00eam d\u00e1ng th\u00e9p (41 d\u00e1ng)..."), "ShowBarShapePicker", 2646
+    AddMenuBtn cb, 2, modUnicode.U("zOfit TKT: Nh\u00e2n b\u1ea3n d\u00f2ng th\u00e9p"), "DuplicateBarRow", 19
+    AddMenuBtn cb, 3, modUnicode.U("zOfit TKT: D\u1eddi l\u00ean tr\u00ean"), "MoveBarRowUp", 2615
+    AddMenuBtn cb, 4, modUnicode.U("zOfit TKT: D\u1eddi xu\u1ed1ng d\u01b0\u1edbi"), "MoveBarRowDown", 2614
+    AddMenuBtn cb, 5, modUnicode.U("zOfit TKT: X\u00f3a d\u00f2ng th\u00e9p"), "DeleteBarRow", 2487
+    AddMenuBtn cb, 6, modUnicode.U("zOfit TKT: V\u1ebd h\u00ecnh minh h\u1ecda l\u00ean b\u1ea3ng"), "RedrawActiveSheetShapes", 1088
+    AddMenuBtn cb, 7, modUnicode.U("zOfit TKT: X\u00f3a h\u00ecnh (Ch\u1ebf \u0111\u1ed9 Si\u00eau nh\u1eb9)"), "ClearActiveSheetShapes", 478
+    On Error GoTo 0
+End Sub
+
+Private Sub BuildRebarCfgPopupMenu()
+    On Error Resume Next
+    Dim cb As CommandBar
+    Set cb = Application.CommandBars("Cell")
+    If cb Is Nothing Then Exit Sub
+
+    AddMenuBtn cb, 1, modUnicode.U("zOfit QS: M\u1edf B\u1ea3ng V\u1ebd & S\u1eeda Th\u00e9p C\u1ea5u Ki\u1ec7n..."), "OpenVisualRebarEditorFromMenu", 295
+    AddMenuBtn cb, 2, modUnicode.U("zOfit QS: Ch\u1ecdn D\u00e1ng Th\u00e9p (41 d\u00e1ng L1..L7)..."), "ShowBarShapePicker", 2646
+    AddMenuBtn cb, 3, modUnicode.U("zOfit QS: Ch\u00e8n Thanh Ch\u00ednh v\u00e0o Block"), "InsertMainBarFromMenu", 295
+    AddMenuBtn cb, 4, modUnicode.U("zOfit QS: Ch\u00e8n Thanh \u0110ai / C-Tie v\u00e0o Block"), "InsertStirrupBarFromMenu", 295
+    AddMenuBtn cb, 5, modUnicode.U("zOfit QS: Ch\u00e8n Thanh T\u00f9y Bi\u1ebfn (CUSTOM)"), "InsertCustomBarFromMenu", 295
+    AddMenuBtn cb, 6, modUnicode.U("zOfit QS: N\u1ea1p / C\u1eadp nh\u1eadt Block Th\u00e9p t\u1eeb QS_Data"), "ExpandPresetsFromMenu", 1088
+    On Error GoTo 0
+End Sub
+
+Private Sub BuildQsDataPopupMenu()
+    On Error Resume Next
+    Dim cb As CommandBar
+    Set cb = Application.CommandBars("Cell")
+    If cb Is Nothing Then Exit Sub
+
+    AddMenuBtn cb, 1, modUnicode.U("zOfit QS: Nh\u1eadp / S\u1eeda Th\u00e9p Tr\u1ef1c Quan (H\u00ecnh v\u1ebd)..."), "OpenVisualRebarEditorFromMenu", 295
+    On Error GoTo 0
+End Sub
+
+Private Sub AddMenuBtn(ByVal cb As CommandBar, ByVal pos As Long, ByVal cap As String, ByVal macroName As String, ByVal face As Long)
+    Dim ctl As CommandBarButton
+    Set ctl = cb.Controls.Add(Type:=msoControlButton, Before:=pos, Temporary:=True)
+    ctl.Caption = cap
+    ctl.OnAction = "'" & ThisWorkbook.Name & "'!" & macroName
+    ctl.FaceId = face
+End Sub
+
+Private Sub ResetTKTPopupMenu()
+    On Error Resume Next
+    Application.CommandBars("Cell").Reset
+    On Error GoTo 0
+End Sub

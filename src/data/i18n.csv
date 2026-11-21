@@ -1,0 +1,56 @@
+Key,VI,EN
+APP_TITLE,zOfit QS Pro - Bộ Công Cụ Bóc Tách Khối Lượng Xây Dựng,zOfit QS Pro - Construction Quantity Surveying Suite
+MSG_NO_WB,Vui lòng mở hoặc tạo một file Excel trước khi sử dụng chức năng này!,Please open or create a workbook before using this feature!
+MSG_INIT_DONE,Đã khởi tạo thành công Hồ sơ QS (QS_Settings + DB_VatLieu + QS_Master_BOQ)! Bạn có thể tùy chỉnh quy tắc đo bóc trong sheet QS_Settings.,QS Workspace initialized successfully (QS_Settings + DB_VatLieu + QS_Master_BOQ)! Customize measurement rules in QS_Settings.
+MSG_SETTINGS_CREATED,Đã tạo/cập nhật sheet thiết lập quy tắc đo bóc QS_Settings cùng đầy đủ Named Ranges chuẩn!,QS_Settings sheet and all standard Named Ranges created/updated successfully!
+MSG_PRESET_APPLIED,Đã áp dụng bộ quy tắc đo bóc chuẩn:,Applied measurement rule preset:
+MSG_LANG_CHANGED,Đã chuyển chế độ ngôn ngữ bảng BOQ sang:,Changed BOQ output language mode to:
+MSG_CATALOG_EXPORTED,Đã xuất bảng tra cứu 1.559 quy cách vật liệu thép/inox/lưới hàn sang sheet DB_VatLieu trong workbook hiện tại!,Exported 1,559 steel/inox/mesh material specifications to DB_VatLieu in the active workbook!
+MSG_INSERT_OK,Đã chèn vật liệu vào dòng hiện tại:,Inserted material into current row:
+MSG_PHASE_NEXT,Tính năng này thuộc Giai đoạn tiếp theo trong lộ trình triển khai cuốn chiếu (GĐ2: TKT Pro | GĐ3: BOQ BTCT & Hoàn thiện | GĐ4: AutoCAD Bridge). Bạn muốn triển khai ngay không?,This feature is scheduled in the next incremental milestone (Phase 2: Rebar BBS Pro | Phase 3: RC & Finishing BOQ | Phase 4: AutoCAD Bridge).
+MSG_CLEAN_NONE,File hiện tại rất sạch! Không phát hiện Defined Names rác ẩn hay lỗi #REF! nào.,This workbook is clean! No hidden garbage or broken Defined Names were found.
+MSG_CLEAN_DONE,Đã dọn sạch hoàn toàn các Defined Names rác/lỗi trong workbook hiện tại! Hãy lưu file (Ctrl+S) để thấy dung lượng file giảm rõ rệt.,Cleaned all garbage/broken Defined Names from the active workbook! Save (Ctrl+S) to see the reduced file size.
+MSG_AUDIT_CLEAN,Tuyệt vời! Không phát hiện lỗi công thức (#REF!, #NAME?, #VALUE!, #DIV/0!, #N/A) nào trên toàn bộ workbook.,Excellent! Zero formula errors (#REF!, #NAME?, #VALUE!, #DIV/0!, #N/A) found across the workbook.
+MSG_AUDIT_FOUND,Đã hoàn tất kiểm tra lỗi BOQ và tạo báo cáo chi tiết tại sheet QS_Audit_Report (có liên kết nhảy thẳng đến từng ô lỗi).,BOQ formula audit completed. Detailed report with clickable links generated in QS_Audit_Report.
+MSG_EXPORT_OK,Đã xuất file sạch không chứa macro (.xlsx) thành công tại:,Exported clean macro-free workbook (.xlsx) to:
+MSG_ABOUT,zOfit QS Pro v1.0 (Giai đoạn 1 - Core Framework & CSDL Vật Liệu) - Bộ Add-in Excel hỗ trợ kỹ sư QS bóc tách khối lượng xây dựng chuyên nghiệp. Tương thích Excel 2016/2019/2021/365 (32-bit & 64-bit). File xuất ra là .xlsx sạch 100%.,zOfit QS Pro v1.0 (Milestone 1 - Core Framework & Material Catalog) - Professional Excel Add-in for Construction Quantity Surveyors. Compatible with Excel 2016/2019/2021/365 (32-bit & 64-bit). Produces 100% clean macro-free .xlsx deliverables.
+SET_TITLE,THIẾT LẬP QUY TẮC ĐO BÓC & HỆ SỐ TÍNH TOÁN (QS SETTINGS),MEASUREMENT RULES & CALCULATION PARAMETERS (QS SETTINGS)
+SET_SUBTITLE,Mọi công thức trong toàn bộ hồ sơ BOQ tự động liên kết với bảng này. Thay đổi tại đây sẽ cập nhật đồng bộ toàn dự án.,All formulas across the BOQ workbook link dynamically to this table. Changes here update the entire project automatically.
+SET_COL_PARAM,Thông số / Quy tắc,Parameter / Rule
+SET_COL_CODE,Mã tham số (Named Range),Parameter Code (Named Range)
+SET_COL_VAL,Giá trị áp dụng,Active Value
+SET_COL_UNIT,Đơn vị / Tùy chọn,Unit / Options
+SET_COL_NOTE,Diễn giải kỹ thuật & Lưu ý QS,Engineering Notes & QS Guidance
+SET_SEC_A,A. THÔNG TIN DỰ ÁN & CHẾ ĐỘ HIỂN THỊ,A. PROJECT INFO & DISPLAY SETTINGS
+SET_SEC_B,B. QUY TẮC TRỪ GIAO HÌNH HỌC (BÊ TÔNG - VÁN KHUÔN - HOÀN THIỆN),B. GEOMETRIC DEDUCTION RULES (CONCRETE - FORMWORK - FINISHING)
+SET_SEC_C,C. QUY TẮC CỐT THÉP & NỐI THÉP (REBAR & SPLICING RULES),C. REBAR & SPLICING RULES
+SET_SEC_D,D. QUY TẮC CÔNG TÁC ĐẤT & BÊ TÔNG LÓT (EARTHWORK & LEAN CONCRETE),D. EARTHWORK & LEAN CONCRETE RULES
+FRM_LOOKUP_TITLE,zOfit QS Pro - Tra Cứu Vật Liệu Thép, Inox & Lưới Hàn,zOfit QS Pro - Steel, Inox & Wire Mesh Material Lookup
+FRM_LBL_CAT,Nhóm vật liệu:,Category:
+FRM_LBL_SEARCH,Tìm nhanh (VD: I200, 50x50, D10, Inox):,Quick Search (e.g. I200, 50x50, D10, Inox):
+FRM_LBL_CALC,Tính nhanh khối lượng:,Quick Weight Calc:
+FRM_LBL_LEN,Dài (m) / Diện tích (m²):,Length (m) / Area (m²):
+FRM_LBL_QTY,Số lượng:,Quantity:
+FRM_LBL_RESULT,Tổng khối lượng:,Total Weight:
+FRM_BTN_INSERT,Chèn vào dòng hiện tại,Insert to Active Row
+FRM_BTN_EXPORT,Xuất Bảng tra sang Workbook,Export Catalog Sheet
+FRM_BTN_CLOSE,Đóng,Close
+FRM_ALL_CATS,-- Tất cả nhóm vật liệu --,-- All Categories --
+CAT_HDR_CAT,Nhóm vật liệu,Category
+CAT_HDR_SUB,Phân loại,Sub-Category
+CAT_HDR_SPEC,Quy cách vật liệu,Material Specification
+CAT_HDR_UNIT,ĐVT chuẩn,Base Unit
+CAT_HDR_LEN,Dài cây chuẩn (m),Std Bar Length (m)
+CAT_HDR_WT,KL đơn vị (kg/m hoặc kg/m²),Unit Weight (kg/m or kg/m²)
+CAT_HDR_WTBAR,KL 1 cây (kg),Weight per Bar (kg)
+CAT_HDR_PRICE,Đơn giá tham khảo (VNĐ/kg),Ref Price (VND/kg)
+CAT_HDR_SRC,Nguồn dữ liệu,Source
+BOQ_TITLE,BẢNG TỔNG HỢP KHỐI LƯỢNG CÔNG TRÌNH (MASTER BOQ),MASTER BILL OF QUANTITIES (MASTER BOQ)
+BOQ_STT,STT,No.
+BOQ_CODE,Mã hiệu / WBS,Code / WBS
+BOQ_DESC,Nội dung công việc,Description of Works
+BOQ_UNIT,ĐVT,Unit
+BOQ_QTY,Khối lượng,Quantity
+BOQ_REF,Nguồn / Sheet tham chiếu,Reference Sheet
+BOQ_NOTE,Ghi chú QS,QS Notes
+AUDIT_TITLE,BÁO CÁO KIỂM TRA LỖI CÔNG THỨC BOQ (QS AUDIT REPORT),BOQ FORMULA ERROR AUDIT REPORT
